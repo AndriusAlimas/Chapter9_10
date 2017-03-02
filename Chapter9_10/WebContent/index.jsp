@@ -8,6 +8,19 @@
 <title>Welcome Page</title>
 </head>
 <body>
+	About to do a risky thing: <br>
 	
-</body>
+	<c:catch var="myException">
+	 <%-- This scriptlet will DEFINITELY cause an exception...but we caught it instead of triggering the error page--%>
+	   <% int x = 10/0; %>
+	   After catch... <%-- You will never see THIS!!! already catch--%> 
+	</c:catch>
+    <%-- to get exception object in not specific designed error page, there is last chance to get 
+    within catch tag using attribute var, this var you give name and this will assign to exception object --%>
+	<h3>If you see this, we survive from error ! </h3>
+	
+	<c:if test="${myException != null}">
+		There was an exception: <b> ${myException.message}</b>
+	</c:if>
+	</body>
 </html>
